@@ -1,11 +1,10 @@
 import React from 'react';
+import {ProductForm} from '../components/ProductForm';
 
 function HomePage() {
   return (
     <div>
-      <form method="POST" action="/api/products">
-        <button>send</button>
-      </form>
+      <ProductForm />
     </div>
   )
 }
