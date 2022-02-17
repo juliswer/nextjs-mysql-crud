@@ -2,12 +2,12 @@ import axios from 'axios';
 
 export function ProductForm() {
 
-    const handleSubmit = async e => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const res = await axios.post('/api/products', {
-            name: 'product 1',
-            price: 'some product',
-            description: 10000
+          name: 'product 1',
+          price: 'some product',
+          description: 10000
         })
         console.log(res);
     }
