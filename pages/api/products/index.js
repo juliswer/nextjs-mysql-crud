@@ -1,25 +1,37 @@
-export default function handler(req, res) {
+import { pool } from "../../../config/db";
 
-    switch (req.method) {
-        case 'GET':
-            console.log('getting products');
-            return res.send('getting products');
-            break;
-        case 'POST':
-            console.log('adding product');
-            return res.send('adding product');
-            break;
-        case 'PUT':
-            console.log('updating product');
-            return res.send('updating product');
-            break;
-        case 'DELETE':
-            console.log('deleting product');
-            return res.send('deleting product');
-            break;
-        default:
-            res.statusCode = 405;
-            return res.send('Method Not Allowed');
-            console.log('method invalid')
-    }
+export default async function handler(req, res) {
+  switch (req.method) {
+    case "GET":
+      return await getProducts(req, res);
+    case "POST":
+      return await saveProduct(req, res);
+    default:
+      return res.status(400).send("Method not allowed");
+  }
 }
+
+const getProducts = async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM product");
+    return res.status(200).json(rows);
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+
+const saveProduct = async (req, res) => {
+  try {
+    const { name, description, price } = req.body;
+
+    const [result] = await pool.query("INSERT INTO product SET ?", {
+      name,
+      description,
+      price,
+    });
+
+    return res.status(200).json({ ...req.body, id: result.insertId });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
