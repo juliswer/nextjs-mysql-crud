@@ -2,9 +2,11 @@ import React from 'react';
 
 function HomePage() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div>
+      <form method="POST" action="/api/products">
+        <button>send</button>
+      </form>
+    </div>
   )
 }
 
