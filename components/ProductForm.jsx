@@ -7,7 +7,7 @@ export function ProductForm() {
         const res = await axios.post('/api/products', {
           name: 'product 1',
           price: 'some product',
-          description: 1000
+          description: 10000
         })
         console.log(res);
     }
