@@ -6,7 +6,7 @@ export function ProductForm() {
         e.preventDefault();
         const res = await axios.post('/api/products', {
           name: 'product 1',
-          price: 'some product',
+          price: 'some product!',
           description: 1000
         })
         console.log(res);
